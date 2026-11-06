@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="google-client-id" content="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
   <title>Three.js 星空互動展示</title>
-  <script src="https://accounts.google.com/gsi/client" async defer onload="googleAuthReady()"></script>
   <style>@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
 :root { color-scheme: dark; font-family: 'DM Sans','Noto Sans TC',sans-serif; background:#050814; color:#f4f6ff; }
 * { box-sizing:border-box; }
@@ -32,15 +32,15 @@ h1 { font-size:clamp(42px,7vw,86px); line-height:1.05; margin:20px 0; letter-spa
   <div id="scene" aria-label="互動式 3D 星球場景"></div>
   <aside class="auth-card" aria-label="Google 帳號登入">
     <div class="auth-brand"><span class="auth-orbit">✦</span><div><strong>星際通行證</strong><small id="auth-status">正在準備登入…</small></div></div>
-    <div id="signed-out"><div id="google-button"></div><p class="auth-note">使用 Google 帳號登入此裝置</p></div>
+    <div id="signed-out"><button id="firebase-google-button" class="firebase-google-button" type="button"><span class="google-g">G</span><span>使用 Google 帳號登入</span></button><p class="auth-note">使用 Google 帳號登入此裝置</p></div>
     <div id="user-panel" hidden><div class="user-info"><img id="user-avatar" alt="" hidden><div><strong id="user-name"></strong><small id="user-email"></small></div></div><button id="logout-button" type="button">登出</button></div>
   </aside>
   <style>#error { position:fixed; z-index:4; left:50%; bottom:24px; transform:translateX(-50%); max-width:calc(100% - 32px); padding:12px 16px; border:1px solid #ff8a9a66; border-radius:12px; background:#25121def; color:#ffd8df; font:14px/1.5 sans-serif; text-align:center; }</style>
   <style>
     .auth-card{position:fixed;z-index:3;right:clamp(18px,4vw,56px);top:clamp(18px,4vw,42px);width:min(310px,calc(100vw - 36px));padding:18px;border:1px solid #a9b8ff32;border-radius:18px;background:linear-gradient(145deg,#111a36dc,#0a1025e8);box-shadow:0 18px 55px #02051080,inset 0 1px #ffffff0c;backdrop-filter:blur(18px);color:#f4f6ff;font-family:'DM Sans','Noto Sans TC',sans-serif}
-    .auth-brand,.user-info{display:flex;align-items:center;gap:12px}.auth-brand{margin-bottom:15px}.auth-brand>div,.user-info>div{display:grid;gap:3px}.auth-brand strong,.user-info strong{font-size:14px}.auth-brand small,.user-info small{font-size:11px;color:#aeb9dd;overflow-wrap:anywhere}.auth-orbit{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;color:#93a5ff;background:#788dff1c;border:1px solid #9aabff48;font-size:20px}.auth-note{margin:10px 0 0;text-align:center;color:#94a0c4;font-size:11px}.auth-card #google-button{min-height:40px;display:flex;justify-content:center}.auth-card #google-button iframe{max-width:100%}.auth-card[hidden],#signed-out[hidden],#user-panel[hidden]{display:none!important}#user-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid #9aabff66}.user-info{min-width:0;flex:1}.user-info>div{min-width:0}.user-info small{max-width:185px}.auth-card #user-panel{display:flex;align-items:center;gap:10px}.auth-card button{border:1px solid #8799ed55;border-radius:10px;background:#7285e91c;color:#e9edff;padding:8px 12px;font:12px inherit;cursor:pointer}.auth-card button:hover{background:#7285e938}@media(max-width:600px){.auth-card{top:14px;right:14px;width:min(285px,calc(100vw - 28px));padding:14px}.overlay{top:auto;bottom:8%;transform:none;left:24px;right:24px}.hint{max-width:320px}}
+    .auth-brand,.user-info{display:flex;align-items:center;gap:12px}.auth-brand{margin-bottom:15px}.auth-brand>div,.user-info>div{display:grid;gap:3px}.auth-brand strong,.user-info strong{font-size:14px}.auth-brand small,.user-info small{font-size:11px;color:#aeb9dd;overflow-wrap:anywhere}.auth-orbit{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;color:#93a5ff;background:#788dff1c;border:1px solid #9aabff48;font-size:20px}.auth-note{margin:10px 0 0;text-align:center;color:#94a0c4;font-size:11px}.auth-card .firebase-google-button{width:100%;min-height:42px;display:flex;justify-content:center;align-items:center;gap:10px;border:1px solid #d4dbf044;border-radius:999px;background:#f5f7ff;color:#171b2b;font:500 13px inherit;cursor:pointer}.auth-card .firebase-google-button:hover{background:#fff}.auth-card .firebase-google-button:disabled{opacity:.6;cursor:wait}.google-g{font:bold 18px Arial,sans-serif;color:#4285f4}.auth-card[hidden],#signed-out[hidden],#user-panel[hidden]{display:none!important}#user-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid #9aabff66}.user-info{min-width:0;flex:1}.user-info>div{min-width:0}.user-info small{max-width:185px}.auth-card #user-panel{display:flex;align-items:center;gap:10px}.auth-card button{border:1px solid #8799ed55;border-radius:10px;background:#7285e91c;color:#e9edff;padding:8px 12px;font:12px inherit;cursor:pointer}.auth-card button:hover{background:#7285e938}@media(max-width:600px){.auth-card{top:14px;right:14px;width:min(285px,calc(100vw - 28px));padding:14px}.overlay{top:auto;bottom:8%;transform:none;left:24px;right:24px}.hint{max-width:320px}}
   </style>  <div id="error" role="status" aria-live="polite" hidden>3D 星球載入失敗，請確認網路連線，或使用支援 WebGL 的瀏覽器。</div>
-  <script src="./auth.js" defer></script>
+  <script type="module" src="./auth.js"></script>
   <script type="module">
 try {
 const THREE = await import('./vendor/three.module.js');
@@ -150,3 +150,4 @@ animate();
 </script>
 </body>
 </html>
+
