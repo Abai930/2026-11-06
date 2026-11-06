@@ -10,7 +10,7 @@
 python -m http.server 8000
 ```
 
-然後瀏覽 `http://localhost:8000`。需要網路連線以載入 Three.js CDN 模組。
+然後瀏覽 `http://localhost:8000`。Three.js 與 OrbitControls 已隨專案提供於 `vendor/`，只需網路載入 Google Fonts。
 
 ## 操作
 
