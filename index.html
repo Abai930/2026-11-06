@@ -32,8 +32,8 @@ h1 { font-size:clamp(42px,7vw,86px); line-height:1.05; margin:20px 0; letter-spa
   <div id="error" role="status" aria-live="polite" hidden>3D 星球載入失敗，請確認網路連線，或使用支援 WebGL 的瀏覽器。</div>
   <script type="module">
 try {
-const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js');
-const { OrbitControls } = await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/controls/OrbitControls.js');
+const THREE = await import('./vendor/three.module.js');
+const { OrbitControls } = await import('./vendor/OrbitControls.js');
 
 const mount = document.querySelector('#scene');
 const scene = new THREE.Scene();
