@@ -17,3 +17,7 @@ python -m http.server 8000
 - 拖曳畫面旋轉視角
 - 滾動滑鼠縮放
 - 點擊畫面觸發星球共鳴效果
+
+## 線上瀏覽（GitHub Pages）
+
+目前可使用 GitHub Pages 將此單頁網站發佈為公開網頁：在 GitHub 專案的 **Settings → Pages**，將 **Source** 設為 **Deploy from a branch**，選擇 **main** 分支及 **/(root)** 後儲存。部署完成後可透過 `https://abai930.github.io/2026-11-06/` 開啟。
